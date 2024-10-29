@@ -37,6 +37,7 @@ const styles = {
 };
 
 const ReviewForm = ({ movie }) => {
+  const context = useContext(MoviesContext);
   const [rating, setRating] = useState(3);
   
   const defaultValues = {
@@ -45,7 +46,7 @@ const ReviewForm = ({ movie }) => {
     agree: false,
     rating: "3",
   };
-  const context = useContext(MoviesContext);
+
   const ratings = [
     {
       value: 5,
