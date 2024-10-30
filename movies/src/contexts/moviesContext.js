@@ -15,6 +15,19 @@ const MoviesContextProvider = (props) => {
     setFavorites(newFavorites)
   };
   
+  const [upcoming, setUpcomiong] = useState([])
+  const addToUpcoming = (movie) => {
+    let newUpcoming = [];
+    if (!upcoming.includes(movie.id)){
+      newUpcoming = [...upcoming, movie.id];
+    }
+    else{
+      newUpcoming = [...upcoming];
+    }
+    setUpcomiong(newUpcoming)
+    console.log(newUpcoming);
+  };
+
   // We will use this function in the next step
   const removeFromFavorites = (movie) => {
     setFavorites( favorites.filter(
@@ -30,6 +43,7 @@ const MoviesContextProvider = (props) => {
       value={{
         favorites,
         addToFavorites,
+        addToUpcoming,
         removeFromFavorites,
         addReview,
       }}
