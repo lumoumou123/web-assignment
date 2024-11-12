@@ -28,6 +28,9 @@ const MoviesContextProvider = (props) => {
     console.log(newUpcoming);
   };
 
+
+  
+
   // We will use this function in the next step
   const removeFromFavorites = (movie) => {
     setFavorites( favorites.filter(
