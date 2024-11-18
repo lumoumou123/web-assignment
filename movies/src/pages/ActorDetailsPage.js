@@ -7,30 +7,44 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { getActorByName } from "../api/tmdb-api";
+import { getActorByName, getActorDetails } from "../api/tmdb-api";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
 const ActorDetails = () => {
   const { id } = useParams();
 
-  const { data, error, isLoading, isError } = useQuery(
-    ["actorSearch", { id: id }], () => getActorByName(id)
+  // 使用 getActorByName 获取演员信息
+  const { data: actorData, error: actorError, isLoading: isActorLoading, isError: isActorError } = useQuery(
+    ["actorSearch", { id: id }],
+    () => getActorByName(id)
   );
 
-  if (isLoading) {
+  // 使用 getActorDetails 获取更详细的演员信息
+  const actor = actorData?.results?.[0];
+  const { data: actorDetails, error: detailsError, isLoading: isDetailsLoading, isError: isDetailsError } = useQuery(
+    ["actorDetails", { id: actor?.id }],
+    () => getActorDetails(actor.id),
+    {
+      enabled: !!actor, // 确保 actor 存在后再调用该 useQuery
+    }
+  );
+
+  if (isActorLoading || isDetailsLoading) {
     return <Spinner />;
   }
 
-  if (isError) {
-    return <h1>{error.message}</h1>;
+  if (isActorError) {
+    return <h1>{actorError.message}</h1>;
   }
 
-  if (!data || !data.results || data.results.length === 0) {
+  if (isDetailsError) {
+    return <h1>{detailsError.message}</h1>;
+  }
+
+  if (!actor) {
     return <h1>Actor not found</h1>;
   }
-
-  const actor = data.results[0];
 
   return (
     <Container>
@@ -64,7 +78,7 @@ const ActorDetails = () => {
               Actor Biography
             </Typography>
             <Typography variant="body1" color="textSecondary" paragraph>
-              {actor.biography || "Biography not available."}
+              {actorDetails.biography || "Biography not available."}
             </Typography>
             <Typography variant="h4" component="div" sx={{ marginBottom: "20px", marginTop: "40px" }}>
               Known For
@@ -86,6 +100,9 @@ const ActorDetails = () => {
                       <Typography gutterBottom variant="h6" component="div">
                         <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
                       </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        {movie.overview}
+                      </Typography>
                     </CardContent>
                   </Card>
                 </Grid>
@@ -99,3 +116,4 @@ const ActorDetails = () => {
 };
 
 export default ActorDetails;
+
