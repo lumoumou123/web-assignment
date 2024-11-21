@@ -7,8 +7,10 @@ const MoviesContextProvider = (props) => {
   const addToFavorites = (movie) => {
     if (!favorites.some((m) => m.id === movie.id)) {
       setFavorites([...favorites, movie]);
+      console.log("Updated favorites:", [...favorites, movie]);
     }
   };
+  
 
   const [upcoming, setUpcoming] = useState([]);
 

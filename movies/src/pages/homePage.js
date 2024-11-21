@@ -3,34 +3,34 @@ import { getMovies } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
-import AddToFavoritesIcon from '../components/cardIcons/addToFavorites'
+import AddToFavoritesIcon from '../components/cardIcons/addToFavorites';
 
-const HomePage = (props) => {
+const HomePage = () => {
+  // 使用 React Query 来获取电影数据
+  const { data, error, isLoading, isError } = useQuery('discover', getMovies);
 
-  const {  data, error, isLoading, isError }  = useQuery('discover', getMovies)
-
+  // 显示加载指示器
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
+  // 显示错误信息
   if (isError) {
-    return <h1>{error.message}</h1>
-  }  
-  const movies = data.results;
+    return <h1>{error.message}</h1>;
+  }
 
-  // Redundant, but necessary to avoid app crashing.
-  const favorites = movies.filter(m => m.favorite)
-  localStorage.setItem('favorites', JSON.stringify(favorites))
- 
+  // 获取电影数据
+  const movies = data?.results || [];
 
   return (
     <PageTemplate
       title="Discover Movies"
       movies={movies}
       action={(movie) => {
-        return <AddToFavoritesIcon movie={movie} />
+        return <AddToFavoritesIcon movie={movie} />;
       }}
     />
-);
+  );
 };
+
 export default HomePage;

@@ -8,6 +8,8 @@ const AddToFavoritesIcon = ({ movie }) => {
 
   const handleAddToFavorites = (e) => {
     e.preventDefault();
+    // 添加日志信息，查看函数是否调用，以及 movie 对象的内容
+    console.log("Adding to favorites:", movie);
     context.addToFavorites(movie);
   };
 
