@@ -3,49 +3,38 @@ import React, { useState } from "react";
 export const MoviesContext = React.createContext(null);
 
 const MoviesContextProvider = (props) => {
-  const [favorites, setFavorites] = useState( [] )
+  const [favorites, setFavorites] = useState([]);
   const addToFavorites = (movie) => {
-    let newFavorites = [];
-    if (!favorites.includes(movie.id)){
-      newFavorites = [...favorites, movie.id];
+    if (!favorites.some((m) => m.id === movie.id)) {
+      setFavorites([...favorites, movie]);
     }
-    else{
-      newFavorites = [...favorites];
-    }
-    setFavorites(newFavorites)
   };
-  
-  const [upcoming, setUpcomiong] = useState([])
+
+  const [upcoming, setUpcoming] = useState([]);
+
   const addToUpcoming = (movie) => {
-    let newUpcoming = [];
-    if (!upcoming.includes(movie.id)){
-      newUpcoming = [...upcoming, movie.id];
+    if (!upcoming.some((m) => m.id === movie.id)) {
+      setUpcoming([...upcoming, movie]);
     }
-    else{
-      newUpcoming = [...upcoming];
-    }
-    setUpcomiong(newUpcoming)
-    console.log(newUpcoming);
+    console.log(upcoming);
   };
-
-
-  
 
   // We will use this function in the next step
   const removeFromFavorites = (movie) => {
-    setFavorites( favorites.filter(
-      (mId) => mId !== movie.id
-    ) )
+    setFavorites(favorites.filter((m) => m.id !== movie.id));
   };
-  const [myReviews, setMyReviews] = useState( {} ) 
+
+  const [myReviews, setMyReviews] = useState({});
   const addReview = (movie, review) => {
-    setMyReviews( {...myReviews, [movie.id]: review } )
+    setMyReviews({ ...myReviews, [movie.id]: review });
   };
+
   return (
     <MoviesContext.Provider
       value={{
         favorites,
         addToFavorites,
+        upcoming,
         addToUpcoming,
         removeFromFavorites,
         addReview,
