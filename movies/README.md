@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# Assignment 1 - ReactJS app.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Name: [haoran lu]
 
-## Available Scripts
+## Overview.
 
-In the project directory, you can run:
+This is a React-based movie fan application that provides various features, including browsing movie information, adding reviews, saving to favorites, filtering, sorting, and managing a watchlist.
 
-### `npm start`
+### Features.
+[ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
+ 
++ Actor list page.
++ Movie filtering functionality (by year and rating, either from high to low or low to high).
++ Pagination for displaying movies.
++ Watchlist functionality.
++ Popular and Upcoming movies pages.
++ Actor details page.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Setup requirements.
+Clone the repository:
+         git clone https://github.com/lumoumou123/web-assignment.git
+Install dependencies:
+        npm install
+Set up the environment variable:
+    Make sure to create a .env file in the root directory and add your TMDB API key as shown above.
+         REACT_APP_TMDB_KEY=<Your_TMDB_API_Key>
+## API endpoints.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
 
-### `npm test`
+e.g.
++ Discover list of movies - /discover/movie
++ Movie details - /movie/:id
++ Upcoming movies - /movie/upcoming
++ Popular movies - /movie/popular
++ Movie credits - /movie/:id/credits
++ Search actor by name - /search/person
++ Actor details - /person/:id
++ Movie genres - /genre/movie/list
++ Movie images - /movie/:id/images
++ Movie reviews - /movie/:id/reviews
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Routing.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[ List the __new routes__ supported by your app and state the associated page.]
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
++ /movies/favorites - Displays a list of favorite movies.
++ /movies/upcoming - Displays a list of upcoming movies.
++ /movies/popular - Displays a list of popular movies.
++ /movies/watch - Displays the user's watchlist.
++ /movies/:id - Displays detailed information about a specific movie.
++ /reviews/:id - Displays the reviews of a specific movie.
++ /actor/:id - Displays details about a specific actor.
++ /reviews/form - Displays a form to add a new movie review.
++ / - Displays the homepage with a list of discovered movies.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Independent learning (If relevant).
++ React Query: Used for data fetching, caching, and state management. Code files include pages/favoriteMoviesPage.js, components/spinner.js. Reference: React Query official documentation.:https://react-query-v3.tanstack.com/overview
++ Material UI: Used as the UI component library for the application. Code files include components/movieCard.js, components/siteHeader.js. Reference: Material UI official documentation:https://mui.com/material-ui/api/accordion/
++ Pagination Implementation: Implemented pagination for displaying movies. Code files include components/templateMovieListPage.js. Reference: Digital Ocean - Pagination in React.:https://www.freecodecamp.org/news/build-a-custom-pagination-component-in-react/
++ TMDB API: Used to fetch movie data from The Movie Database (TMDB), files include api/tmdb-api.js.:https://developer.themoviedb.org/reference/intro/getting-started
